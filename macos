@@ -1,0 +1,417 @@
+#!/usr/bin/env bash
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until the script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+install_thoughtbot() {
+  mkdir -p "$HOME/installer/logs" && cd "$HOME/installer"
+
+  # Don't check if this file exists, download it each time
+  # Remove the sed in a few days after https://github.com/thoughtbot/laptop/pull/534/files is merged
+  curl https://raw.githubusercontent.com/thoughtbot/laptop/master/mac | sed 's/"$language" | tail -1/"$language" | grep -v "[a-z]" | tail -1/g' > mac
+  . ./mac
+  
+  # Install basic dotfiles
+  if [ -d "$HOME/.dotfiles" ]; then
+    cd "$HOME/.dotfiles"
+    git pull
+  else
+    git clone git://github.com/thoughtbot/dotfiles.git "$HOME/.dotfiles"
+    git clone https://github.com/execat/dotfiles-local.git "$HOME/.dotfiles-local"
+  fi
+
+  env RCRC=$HOME/.dotfiles/rcrc rcup
+  rcup
+
+  # Install 3 finger drag
+  defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+
+  # Disable hot corners
+  defaults write com.apple.dock wvous-tr-corner -int 0
+  defaults write com.apple.dock wvous-tl-corner -int 0
+}
+
+install_brew() {
+  # Install Java for aircrack and other software
+  # brew cask install java
+  brew cask install caskroom/versions/java8
+
+  brew bundle --file=- <<EOF
+  # Shell
+  brew "bash"
+  brew "bash-completion2"
+  brew "binutils"
+  brew "cowsay"
+  brew "exa"
+  brew "fasd"
+  brew "findutils"
+  brew "fortune"
+  brew "fzf"
+  brew "moreutils"
+  brew "tree"
+  brew "zsh-autosuggestions"
+
+  # GNU utilities
+  brew "gawk"
+  brew "gcc"
+  brew "gnu-indent"
+  brew "gnu-sed"
+  brew "gnu-tar"
+  # brew "gnupg"
+  brew "grep"
+
+  # Security
+  brew "aircrack-ng"
+  brew "binwalk"
+  brew "cifer"
+  brew "fcrackzip"
+  brew "foremost"
+  brew "mitmproxy"
+  brew "hydra"
+  brew "john"
+  brew "openssh"
+  brew "tcpflow"
+  brew "tcpreplay"
+  brew "tcptrace"
+  brew "socat"
+  brew "sqlmap"
+
+  # Git addons
+  brew "bfg"
+  brew "git-extras"
+  brew "git-flow"
+  brew "git-lfs"
+
+  # Languages
+  brew "chezscheme"
+  brew "coq"
+  brew "crystal"
+  brew "elixir"
+  brew "elm"
+  brew "erlang"
+  brew "go"
+  brew "guile"
+  brew "leiningen"
+  brew "lua"
+  brew "mit-scheme"
+  brew "r"
+  brew "rust"
+  brew "s-lang"
+  brew "sbt"
+  # Haskell packages
+  brew "ghc"
+  brew "cabal-install"
+  brew "stack"
+
+  # Web
+  brew "lynx"
+
+  # Servers
+  brew "darkhttpd"
+  brew "docker"
+  brew "elasticsearch"
+  brew "kubernetes-cli"
+  brew "mongodb"
+  brew "mysql"
+
+  # Text editors
+  brew "emacs"
+  brew "neovim"
+
+  # Utilities
+  brew "buku"
+  brew "cloc"
+  brew "dark-mode"
+  brew "highlight"
+  brew "howdoi"
+  brew "httpie"
+  brew "jq"
+  brew "fdupes"
+  brew "mackup"
+  brew "mas"
+  brew "midnight-commander"
+  brew "mycli"
+  brew "p7zip"
+  brew "pigz"
+  brew "pgcli"
+  brew "pv"
+  brew "rename"
+  brew "ripgrep"
+  brew "speedtest-cli"
+  brew "ssh-copy-id"
+  brew "sylpheed"
+  brew "thefuck"
+  brew "tldr"
+  brew "wget"
+  brew "youtube-dl"
+
+  # Media
+  brew "ffmpeg"
+  brew "lame"
+EOF
+}
+
+install_brew_cask() {
+  brew bundle --file=- <<EOF
+  # Brew cask formulae
+  # Academics
+  cask "manuscripts"
+  cask "praat"
+  cask "texpad"
+
+  # Markdown_editors
+  cask "macdown"
+  cask "marp"
+  # cask "mou" # Not available for 10.12+
+  cask "typora"
+
+  # Book
+  cask "calibre"
+  cask "ichm"
+  cask "pdf-expert"
+  cask "sigil"
+  cask "skim"
+
+  # Utils
+  cask "alfred"
+  cask "amethyst"
+  cask "charles"
+  cask "dash"
+  cask "deeper"
+  cask "diffmerge"
+  cask "dropbox"
+  cask "expressions"
+  cask "flux"
+  cask "iterm2"
+  cask "jdiskreport"
+  cask "kap"
+  cask "karabiner"
+  cask "kdiff3"
+  cask "keepingyouawake"
+  cask "keka"
+  cask "launchrocket"
+  cask "numi"
+  cask "nvalt"
+  cask "selfcontrol"
+  cask "smcfancontrol"
+  cask "tomighty"
+  cask "suspicious-package"
+  cask "tunnelblick"
+  cask "vienna"
+  cask "yujitach-menumeters"
+
+  # Music
+  cask "clementine"
+  cask "neteasemusic"
+  cask "transmission"
+  cask "xiami"
+
+  # Database
+  cask "dbeaver-community"
+  cask "sequel-pro"
+  cask "db-browser-for-sqlite"
+
+  # Communication
+  cask "electronic-wechat"
+  cask "flume"
+  cask "keybase"
+  cask "noti"
+  cask "skype"
+  cask "teamviewer"
+  cask "telegram"
+
+  # Browsers
+  cask "firefox"
+  cask "google-chrome"
+  cask "torbrowser"
+
+  # Media
+  cask "darktable"
+  cask "iina"
+  cask "xquartz" # Needed for Inkscape
+  cask "inkscape"
+  cask "kodi"
+  cask "handbrake"
+  cask "helium"
+  cask "mpv"
+  cask "rawtherapee"
+  # cask "soundflower" # Failing
+  cask "tuxguitar"
+  cask "vlc"
+
+  # Games
+  cask "0-ad"
+  cask "openemu"
+  # cask "playonmac"
+
+  # Programming
+  cask "affinic-debugger"
+  cask "iterm2"
+  cask "kitematic"
+  # cask "virtualbox"
+
+  # Languages
+  cask "racket"
+
+  # IDE
+  cask "android-studio"
+  cask "atom"
+  cask "expo-xde"
+  cask "intellij-idea-ce"
+  cask "hex-fiend"
+  cask "rstudio"
+  cask "sublime-text"
+
+  # RestClient
+  cask "cocoarestclient"
+  cask "insomnia"
+  cask "postman"
+
+  tap "caskroom/fonts"
+
+  # Brew cask fonts
+  # Fonts
+  cask "font-inconsolata-dz-for-powerline"
+  cask "font-inconsolata-for-powerline"
+  cask "font-inconsolata-g-for-powerline"
+  cask "font-menlo-for-powerline"
+  cask "font-meslo-for-powerline"
+  cask "font-noto-mono-for-powerline"
+EOF
+}
+
+run_script() {
+  # End script before killing all applications
+  curl https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos | \
+    sed -e 's/# Kill affected applications/exit/g' | \
+    sed -e 's/AppleLanguages -array "en" "nl"/AppleLanguages -array "en" "cn"/g' | \
+    sed -e 's/AppleLocale -string "en_GB@currency=EUR"/AppleLocale -string "en_US@currency=USD"/g' | \
+    sed -e 's/Europe\/Brussels/America\/Chicago/g' | \
+    grep -v 'com.apple.dock wvous' | \
+    grep -v 'open "${HOME}/init/Solarized Dark.itermcolors' | \
+    grep -v 'com.irradiatedsoftware.SizeUp' | \
+    grep -v 'Spectacle' | \
+    grep -v 'com.twitter' | \
+    grep -v 'com.tapbots.TweetbotMac' | \
+    bash
+  cat <<EOF
+# Set computer name (as done via System Preferences → Sharing)
+sudo scutil --set ComputerName "beluga"
+sudo scutil --set HostName "beluga"
+sudo scutil --set LocalHostName "beluga"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "beluga"
+
+# Wipe all (default) app icons from the Dock
+# defaults write com.apple.dock persistent-apps -array
+EOF
+}
+
+# Install ohmyzsh
+install_ohmyzsh() {
+  if [ -d "$HOME/.oh-my-zsh" ]; then
+    cd "$HOME/.oh-my-zsh"
+    git pull
+  else
+    # Do entire oh-my-zsh installation but don't drop in the Zsh session (last line of the script)
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh')"
+    git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $HOME/.oh-my-zsh/custom/plugins/you-should-use
+    # Change theme (remove '' if not on macOS)
+    # sed -i "s/robbyrussell/af-magic/g" ~/.zshrc
+    echo "Now customizing zsh setup"
+    sed -i '' "s/robbyrussell/af-magic/g" ~/.zshrc
+    cat >> ~/.zshrc <<EOF
+
+# Local config
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
+
+export PATH="$HOME/.bin:$PATH"
+EOF
+  fi
+  # Change permissions so that zsh does not complain
+  chmod g-w,o-w /usr/local/share
+  # Use .dotfiles and .dotfiles-local to create aliases
+  rcup -d .dotfiles -d .dotfiles-local
+  # `locate` command initialization
+  sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+}
+
+# Install SpaceVim for neovim
+install_spacevim() {
+  if [ -d "$HOME/.SpaceVim" ]; then
+    cd "$HOME/.SpaceVim"
+    git pull
+  else
+    curl -sLf https://spacevim.org/install.sh | bash -s -- --install neovim
+    pip install neovim
+    nvim
+
+    if [ -d "$HOME/.SpaceVim.d" ]; then
+      echo "Moving init.toml"
+      mv ~/.SpaceVim.d/init.toml{,.bak}
+      cat > ~/.SpaceVim.d/init.vim <<EOF
+let g:spacevim_plugin_bundle_dir = '~/.cache/vimfiles/'
+call SpaceVim#layers#load('lang#ruby')
+call SpaceVim#layers#load('ctrlp')
+call SpaceVim#layers#load('shell')
+
+let g:spacevim_custom_plugins = [
+      \ ['sotte/presenting.vim'],
+      \ ]
+
+set clipboard+=unnamedplus
+
+" Use the arrows to something usefull
+map <right> :bn<CR>
+map <left> :bp<CR>
+
+" Close all the buffers
+map <leader>ba :1,300 bd!<CR>
+
+set wrap
+EOF
+    else
+      echo "Folder not found"
+    fi
+  fi
+}
+
+show_final_messages() {
+  cat << END
+  Go to Trackpad and uncheck and check the "Tap to click" and "Secondary click" option.
+  Also move click to "light" and turn on silent clicking.
+
+  Also do these things manually:
+  1. Activate unlimited scrollback for iTerm, set to 'reuse previous dir', change font to Inconsolata-dz Pt 14
+  2. Go to Finder -> Cmd + up arrow 2 times -> Drag your home folder to left sidebar
+  3. Click on battery on top right and click on "Show Percentage"
+  4. Login to your Firefox account and start bookmark/addon sync
+  5. Login to your accounts in Netease Music Player/Xiami
+  6. Put Flux on autostart
+  7. Login to Dropbox, Skype, Telegram
+  8. Make VLC default player for famous formats
+  9. Copy over important VPN configs for Tunnelblick and database configs for Sequel Pro
+  10. Set up Kodi as per the reddit thread
+  11. Set up .ssh keys (copy or create new)
+  12. You might want to log in to these websites:
+    Google account | Twitter | Amazon | GitHub | GitLab | reddit
+  13. Start jdiskreport and run mlocate
+  14. Set up keyboards for your preferred languages and layouts
+  15. Put sensible defaults for Menumeters
+
+  Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
+END
+}
+
+install_thoughtbot
+install_brew
+install_brew_cask
+run_script
+install_ohmyzsh
+install_spacevim
+show_final_messages
