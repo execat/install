@@ -406,7 +406,8 @@ show_final_messages() {
   16. Install Xcode from App Store and execute these two commands:
       * sudo xcode-select -s /Applications/Xcode.app
       * sudo xcodebuild -license
-  17. Run Android Studio so that it can download shizzle for you (~1GB of things but takes a while)
+      And run Xcode (you might have to install additional components)
+  17. Run Android Studio so that it can download shizzle for you (~1GB of stuff but takes a while)
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
