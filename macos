@@ -403,6 +403,10 @@ show_final_messages() {
   13. Start jdiskreport and run mlocate
   14. Set up keyboards for your preferred languages and layouts
   15. Put sensible defaults for Menumeters
+  16. Install Xcode from App Store and execute these two commands:
+      * sudo xcode-select -s /Applications/Xcode.app
+      * sudo xcodebuild -license
+  17. Run Android Studio so that it can download shizzle for you (~1GB of things but takes a while)
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
