@@ -142,7 +142,7 @@ install_brew() {
   brew "ripgrep"
   brew "speedtest-cli"
   brew "ssh-copy-id"
-  brew "sylpheed"
+  # brew "sylpheed"
   brew "thefuck"
   brew "tldr"
   brew "wget"
