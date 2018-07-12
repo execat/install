@@ -408,6 +408,7 @@ show_final_messages() {
       * sudo xcodebuild -license
       And run Xcode (you might have to install additional components)
   17. Run Android Studio so that it can download shizzle for you (~1GB of stuff but takes a while)
+  18. Execute `defaults write com.apple.dock persistent-apps -array` to remove all the dock items (if installing for the first time)
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
