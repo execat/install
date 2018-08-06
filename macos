@@ -9,8 +9,7 @@ install_thoughtbot() {
   mkdir -p "$HOME/installer/logs" && cd "$HOME/installer"
 
   # Don't check if this file exists, download it each time
-  # Remove the sed in a few days after https://github.com/thoughtbot/laptop/pull/534/files is merged
-  curl https://raw.githubusercontent.com/thoughtbot/laptop/master/mac | sed 's/"$language" | tail -1/"$language" | grep -v "[a-z]" | tail -1/g' > mac
+  curl https://raw.githubusercontent.com/thoughtbot/laptop/master/mac > mac
   . ./mac
   
   # Install basic dotfiles
@@ -409,6 +408,7 @@ show_final_messages() {
       And run Xcode (you might have to install additional components)
   17. Run Android Studio so that it can download shizzle for you (~1GB of stuff but takes a while)
   18. Execute `defaults write com.apple.dock persistent-apps -array` to remove all the dock items (if installing for the first time)
+  19. Disable notifications on Firefox: about:config > dom.webnotifications.enabled > set to false
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
