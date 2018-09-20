@@ -291,6 +291,9 @@ EOF
 install_binaries() {
   # Check their GitHub: https://github.com/thisredone/rb
   curl https://raw.githubusercontent.com/thisredone/rb/master/rb -o ~/.bin/rb && chmod a+x ~/.bin/rb
+
+  # WeChat plugin
+  cd ~/Downloads && rm -rf WeChatPlugin-MacOS && git clone https://github.com/TKkk-iOSer/WeChatPlugin-MacOS.git --depth=1 && ./WeChatPlugin-MacOS/Other/Install.sh
 }
 
 run_script() {
