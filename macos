@@ -220,13 +220,13 @@ install_brew_cask() {
   cask "db-browser-for-sqlite"
 
   # Communication
-  cask "electronic-wechat"
   cask "flume"
   cask "keybase"
   cask "noti"
   cask "skype"
   cask "teamviewer"
   cask "telegram"
+  cask "wechat"
 
   # Browsers
   cask "firefox"
