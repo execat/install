@@ -16,6 +16,8 @@ install_thoughtbot() {
   if [ -d "$HOME/.dotfiles" ]; then
     cd "$HOME/.dotfiles"
     git pull
+    cd "$HOME/.dotfiles-local"
+    git pull
   else
     git clone git://github.com/thoughtbot/dotfiles.git "$HOME/.dotfiles"
     git clone https://github.com/execat/dotfiles-local.git "$HOME/.dotfiles-local"
@@ -84,6 +86,8 @@ install_brew() {
   brew "git-flow"
   brew "git-lfs"
 
+  brew "fossil"
+
   # Languages
   brew "chezscheme"
   brew "coq"
@@ -134,6 +138,7 @@ install_brew() {
   brew "midnight-commander"
   brew "mycli"
   brew "p7zip"
+  brew "pandoc"
   brew "pigz"
   brew "pgcli"
   brew "pv"
@@ -192,6 +197,7 @@ install_brew_cask() {
   cask "keepingyouawake"
   cask "keka"
   cask "launchrocket"
+  cask "meld"
   cask "numi"
   cask "nvalt"
   cask "selfcontrol"
@@ -282,6 +288,11 @@ install_brew_cask() {
 EOF
 }
 
+install_binaries() {
+  # Check their GitHub: https://github.com/thisredone/rb
+  curl https://raw.githubusercontent.com/thisredone/rb/master/rb -o ~/.bin/rb && chmod a+x ~/.bin/rb
+}
+
 run_script() {
   # End script before killing all applications
   curl https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos | \
@@ -317,9 +328,10 @@ install_ohmyzsh() {
     # Do entire oh-my-zsh installation but don't drop in the Zsh session (last line of the script)
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh')"
     git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $HOME/.oh-my-zsh/custom/plugins/you-should-use
+
+    echo "Now customizing zsh setup"
     # Change theme (remove '' if not on macOS)
     # sed -i "s/robbyrussell/af-magic/g" ~/.zshrc
-    echo "Now customizing zsh setup"
     sed -i '' "s/robbyrussell/af-magic/g" ~/.zshrc
     cat >> ~/.zshrc <<EOF
 
@@ -332,6 +344,7 @@ install_ohmyzsh() {
 export PATH="$HOME/.bin:$PATH"
 EOF
   fi
+
   # Change permissions so that zsh does not complain
   chmod g-w,o-w /usr/local/share
   # Use .dotfiles and .dotfiles-local to create aliases
@@ -417,6 +430,7 @@ END
 install_thoughtbot
 install_brew
 install_brew_cask
+install_binaries
 run_script
 install_ohmyzsh
 install_spacevim
