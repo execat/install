@@ -63,9 +63,11 @@ install_thoughtbot() {
     cd "$HOME/.dotfiles-local"
     git pull
   else
+    # Clone dotfiles
     git clone git://github.com/thoughtbot/dotfiles.git "$HOME/.dotfiles"
     git clone https://github.com/execat/dotfiles-local.git "$HOME/.dotfiles-local"
-    
+
+    # Install RCM for linking dotfiles
     sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm
     sudo apt update
     sudo apt install rcm
@@ -82,6 +84,7 @@ install_apt() {
 
   # All utils
   sudo apt install bash cowsay findutils mlocate moreutils binutils diffutils
+  sudo apt install -y libssl-dev libreadline-dev zlib1g-dev # For Ruby
   sudo apt install python3-dev python3-pip
   sudo pip3 install thefuck
 }
@@ -93,7 +96,17 @@ install_packages() {
   fi
 
   if [ ! -d "$HOME/.rbenv" ]; then
-    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+    export PATH="$HOME/.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    ~/.rbenv/bin/rbenv init || true
+    mkdir -p "$(rbenv root)"/plugins
+    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+    git clone https://github.com/rbenv/rbenv-default-gems.git $(rbenv root)/plugins/rbenv-default-gems
+    cat >> ~/.rbenv/default-gems <<EOF
+bundler
+pry
+activesupport
+EOF
   fi
 }
 
@@ -103,10 +116,11 @@ install_binaries() {
 }
 
 run_script() {
+  rbenv init || true
   rbenv install jruby-9.2.0.0
   rbenv install 2.5.3
   rbenv global 2.5.3
-  mkdir _code
+  mkdir -p _code
 }
 
 # Install ohmyzsh
@@ -187,29 +201,9 @@ show_final_messages() {
   Also move click to "light" and turn on silent clicking.
 
   Also do these things manually:
-  1. Activate unlimited scrollback for iTerm, set to 'reuse previous dir', change font to Inconsolata-dz Pt 14
-  2. Go to Finder -> Cmd + up arrow 2 times -> Drag your home folder to left sidebar
-  3. Click on battery on top right and click on "Show Percentage"
-  4. Login to your Firefox account and start bookmark/addon sync
-  5. Login to your accounts in Netease Music Player/Xiami
-  6. Put Flux on autostart
-  7. Login to Dropbox, Skype, Telegram
-  8. Make VLC default player for famous formats
-  9. Copy over important VPN configs for Tunnelblick and database configs for Sequel Pro
-  10. Set up Kodi as per the reddit thread
-  11. Set up .ssh keys (copy or create new)
-  12. You might want to log in to these websites:
-    Google account | Twitter | Amazon | GitHub | GitLab | reddit
-  13. Start jdiskreport and run mlocate
-  14. Set up keyboards for your preferred languages and layouts
-  15. Put sensible defaults for Menumeters
-  16. Install Xcode from App Store and execute these two commands:
-      * sudo xcode-select -s /Applications/Xcode.app
-      * sudo xcodebuild -license
-      And run Xcode (you might have to install additional components)
-  17. Run Android Studio so that it can download shizzle for you (~1GB of stuff but takes a while)
-  18. Execute 'defaults write com.apple.dock persistent-apps -array' to remove all the dock items (if installing for the first time)
-  19. Disable notifications on Firefox: about:config > dom.webnotifications.enabled > set to false
+  1. Set up .ssh keys (copy or create new)
+  2. Start jdiskreport and run mlocate
+  3. Set up keyboards for your preferred languages and layouts
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
