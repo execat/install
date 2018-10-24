@@ -334,6 +334,7 @@ install_ohmyzsh() {
     # Do entire oh-my-zsh installation but don't drop in the Zsh session (last line of the script)
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh')"
     git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $HOME/.oh-my-zsh/custom/plugins/you-should-use
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
     echo "Now customizing zsh setup"
     # Change theme (remove '' if not on macOS)
