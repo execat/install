@@ -44,14 +44,14 @@ install_thoughtbot() {
 }
 
 install_apt() {
-  sudo apt install fasd tree git-extras git-flow elixir emacs neovim cloc howdoi wget
-  sudo add-apt-repository ppa:webupd8team/java
-  sudo apt install oracle-java8-installer
+  sudo apt install -y fasd tree git-extras git-flow elixir emacs neovim cloc howdoi wget
+  sudo add-apt-repository -y ppa:webupd8team/java
+  sudo apt install -y oracle-java8-installer
 
   # All utils
-  sudo apt install bash cowsay findutils mlocate moreutils binutils diffutils
+  sudo apt install -y bash cowsay findutils mlocate moreutils binutils diffutils
   sudo apt install -y libssl-dev libreadline-dev zlib1g-dev # For Ruby
-  sudo apt install python3-dev python3-pip
+  sudo apt install -y python3-dev python3-pip
   sudo pip3 install thefuck
 }
 
@@ -73,8 +73,8 @@ bundler
 pry
 activesupport
 EOF
-  fi
   echo 'Wrote default gems file'
+  fi
 }
 
 install_binaries() {
