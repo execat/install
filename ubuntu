@@ -59,8 +59,10 @@ install_packages() {
     ~/.fzf/install
   fi
 
+  # Export path with rbenv
+  # Irrespective of rbenv existing because it will exist soon if it doesn't already
+  export PATH="$HOME/.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
   if [ ! -d "$HOME/.rbenv" ]; then
-    export PATH="$HOME/.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     ~/.rbenv/bin/rbenv init || true
     mkdir -p "$(rbenv root)"/plugins
