@@ -115,9 +115,9 @@ install_ohmyzsh() {
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-eval "$(rbenv init -)" +
+eval "\$(rbenv init -)" +
 
-export PATH="$HOME/.bin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+export PATH="\$HOME/.bin:\$HOME/.rbenv/bin:\$HOME/.rbenv/shims:\$PATH"
 EOF
   fi
   
