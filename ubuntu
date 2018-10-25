@@ -218,7 +218,7 @@ END
 
 install_thoughtbot
 install_apt
-install_packages
+install_packages || true
 install_binaries
 run_script
 install_ohmyzsh
