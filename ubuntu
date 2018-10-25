@@ -111,10 +111,12 @@ pry
 activesupport
 EOF
   fi
+  echo 'Wrote default gems file'
 }
 
 install_binaries() {
   # Check their GitHub: https://github.com/thisredone/rb
+  echo 'Downloading and saving binaries'
   curl https://raw.githubusercontent.com/thisredone/rb/master/rb -o ~/.bin/rb && chmod a+x ~/.bin/rb
 }
 
