@@ -9,32 +9,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 sudo apt update && sudo apt upgrade -y
   
 install_thoughtbot() {
-  fancy_echo() {
-    local fmt="$1"; shift
-
-    # shellcheck disable=SC2059
-    printf "\\n$fmt\\n" "$@"
-  }
-
-  append_to_zshrc() {
-    local text="$1" zshrc
-    local skip_new_line="${2:-0}"
-
-    if [ -w "$HOME/.zshrc.local" ]; then
-      zshrc="$HOME/.zshrc.local"
-    else
-      zshrc="$HOME/.zshrc"
-    fi
-
-    if ! grep -Fqs "$text" "$zshrc"; then
-      if [ "$skip_new_line" -eq 1 ]; then
-        printf "%s\\n" "$text" >> "$zshrc"
-      else
-        printf "\\n%s\\n" "$text" >> "$zshrc"
-      fi
-    fi
-  }
-
   # shellcheck disable=SC2154
   trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -47,17 +21,6 @@ install_thoughtbot() {
   if [ ! -f "$HOME/.zshrc" ]; then
     touch "$HOME/.zshrc"
   fi
-
-  # shellcheck disable=SC2016
-  append_to_zshrc 'export PATH="$HOME/.bin:$PATH"'
-
-  gem_install_or_update() {
-    if gem list "$1" --installed > /dev/null; then
-      gem update "$@"
-    else
-      gem install "$@"
-    fi
-  }
   
   # Install basic dotfiles
   if [ -d "$HOME/.dotfiles" ]; then
