@@ -44,7 +44,7 @@ install_thoughtbot() {
 }
 
 install_apt() {
-  sudo apt install -y cloc elixir emacs fasd git-extras git-flow howdoi neovim tree vim wget zsh
+  sudo apt install -y cloc emacs fasd git-extras git-flow howdoi neovim tree vim wget zsh
 
   # All utils
   sudo apt install -y bash cowsay findutils mlocate moreutils binutils diffutils
