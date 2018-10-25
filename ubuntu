@@ -173,7 +173,7 @@ show_final_messages() {
   1. Set up .ssh keys (copy or create new)
   2. Start jdiskreport and run mlocate
   3. Set up keyboards for your preferred languages and layouts
-  4. Change shell by executing `chsh -s $(grep /zsh$ /etc/shells | tail -1)`
+  4. Change shell by executing 'chsh -s $(grep /zsh$ /etc/shells | tail -1)'
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
