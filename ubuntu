@@ -45,8 +45,6 @@ install_thoughtbot() {
 
 install_apt() {
   sudo apt install -y cloc elixir emacs fasd git-extras git-flow howdoi neovim tree vim wget
-  sudo add-apt-repository -y ppa:webupd8team/java
-  sudo apt install -y oracle-java8-installer
 
   # All utils
   sudo apt install -y bash cowsay findutils mlocate moreutils binutils diffutils
