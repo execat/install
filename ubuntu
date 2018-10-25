@@ -133,7 +133,6 @@ install_spacevim() {
   else
     curl -sLf https://spacevim.org/install.sh | bash -s -- --install neovim
     sudo pip3 install neovim
-    nvim
 
     if [ -d "$HOME/.SpaceVim.d" ]; then
       echo "Moving init.toml"
