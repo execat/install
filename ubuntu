@@ -47,7 +47,7 @@ install_apt() {
   sudo apt install -y cloc emacs fasd git-extras git-flow howdoi neovim tree vim wget zsh
 
   # All utils
-  sudo apt install -y bash cowsay findutils mlocate moreutils binutils diffutils
+  sudo apt install -y bash cowsay findutils mlocate moreutils binutils diffutils libsqlite3-dev
   sudo apt install -y libssl-dev libreadline-dev zlib1g-dev # For Ruby
   sudo apt install -y python3-dev python3-pip
   sudo pip3 install thefuck
