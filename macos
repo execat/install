@@ -371,31 +371,9 @@ install_spacevim() {
     nvim
 
     if [ -d "$HOME/.SpaceVim.d" ]; then
-      echo "Moving init.toml"
-      mv ~/.SpaceVim.d/init.toml{,.bak}
-      cat > ~/.SpaceVim.d/init.vim <<EOF
-let g:spacevim_plugin_bundle_dir = '~/.cache/vimfiles/'
-call SpaceVim#layers#load('lang#ruby')
-call SpaceVim#layers#load('ctrlp')
-call SpaceVim#layers#load('shell')
-
-let g:spacevim_custom_plugins = [
-      \ ['sotte/presenting.vim'],
-      \ ]
-
-set clipboard+=unnamedplus
-
-" Use the arrows to something usefull
-map <right> :bn<CR>
-map <left> :bp<CR>
-
-" Close all the buffers
-map <leader>ba :1,300 bd!<CR>
-
-set wrap
-EOF
+      echo "~/.SpaceVim.d is created"
     else
-      echo "Folder not found"
+      echo "~/.SpaceVim.d folder not found"
     fi
   fi
 }
