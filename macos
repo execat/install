@@ -163,7 +163,6 @@ install_brew_cask() {
   # Academics
   cask "manuscripts"
   cask "praat"
-  cask "texpad"
 
   # Markdown_editors
   cask "macdown"
@@ -172,7 +171,7 @@ install_brew_cask() {
 
   # Book
   cask "calibre"
-  cask "ichm"
+  # cask "ichm"
   cask "pdf-expert"
   cask "sigil"
   cask "skim"
@@ -192,7 +191,6 @@ install_brew_cask() {
   cask "jdiskreport"
   cask "kap"
   cask "karabiner-elements"
-  cask "kdiff3"
   cask "keepingyouawake"
   cask "keka"
   cask "launchrocket"
@@ -232,15 +230,15 @@ install_brew_cask() {
   # Browsers
   cask "firefox"
   cask "google-chrome"
-  cask "firefox-developer-edition"
+  brew "homebrew/cask-versions/firefox-developer-edition"
   cask "tor-browser"
   cask "beaker-browser"
 
   # Media
   cask "darktable"
   cask "iina"
-  cask "xquartz" # Needed for Inkscape
-  cask "inkscape"
+  # cask "xquartz" # Needed for Inkscape
+  # cask "inkscape"
   cask "kodi"
   cask "handbrake"
   cask "helium"
@@ -257,7 +255,7 @@ install_brew_cask() {
   # cask "playonmac"
 
   # Programming
-  cask "affinic-debugger"
+  # cask "affinic-debugger"
   cask "kitematic"
   # cask "virtualbox"
 
