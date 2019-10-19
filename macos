@@ -258,7 +258,6 @@ install_brew_cask() {
 
   # Programming
   cask "affinic-debugger"
-  cask "iterm2"
   cask "kitematic"
   # cask "virtualbox"
 
@@ -268,9 +267,9 @@ install_brew_cask() {
   # IDE
   cask "android-studio"
   cask "atom"
-  cask "expo-xde"
   cask "intellij-idea-ce"
   cask "hex-fiend"
+  cask "r"
   cask "rstudio"
   cask "sublime-text"
 
@@ -279,7 +278,7 @@ install_brew_cask() {
   cask "insomnia"
   cask "postman"
 
-  tap "caskroom/fonts"
+  tap "homebrew/cask-fonts"
 
   # Brew cask fonts
   # Fonts
@@ -301,6 +300,9 @@ install_binaries() {
 
   # Ammonite REPL for Scala
   sh -c '(echo "#!/usr/bin/env sh" && curl -L https://github.com/lihaoyi/Ammonite/releases/download/1.2.1/2.12-1.2.1) > ~/.bin/amm && chmod a+x ~/.bin/amm'
+
+  # Expo and related NPM packages
+  # npm install expo-cli --global
 }
 
 run_script() {
