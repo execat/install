@@ -64,22 +64,6 @@ install_brew() {
   # brew "gnupg"
   brew "grep"
 
-  # Security
-  brew "aircrack-ng"
-  brew "binwalk"
-  brew "cifer"
-  brew "fcrackzip"
-  brew "foremost"
-  brew "mitmproxy"
-  brew "hydra"
-  brew "john"
-  brew "openssh"
-  brew "tcpflow"
-  brew "tcpreplay"
-  brew "tcptrace"
-  brew "socat"
-  brew "sqlmap"
-
   # Git addons
   brew "bfg"
   brew "git-extras"
@@ -114,9 +98,11 @@ install_brew() {
 
   # Servers
   brew "darkhttpd"
+  cask "homebrew/cask-versions/adoptopenjdk8"
   brew "elasticsearch"
-  brew "kubernetes-cli"
-  brew "mongodb/brew/mongodb-community"
+  # brew "kubernetes-cli" # Docker installs this
+  tap "mongodb/brew"
+  brew "mongodb-community"
   brew "mysql"
 
   # Text editors
@@ -154,6 +140,22 @@ install_brew() {
   # Media
   brew "ffmpeg"
   brew "lame"
+
+  # Security
+  brew "aircrack-ng"
+  brew "binwalk"
+  brew "cifer"
+  brew "fcrackzip"
+  brew "foremost"
+  brew "mitmproxy"
+  brew "hydra"
+  brew "john"
+  brew "openssh"
+  brew "tcpflow"
+  brew "tcpreplay"
+  brew "tcptrace"
+  brew "socat"
+  brew "sqlmap"
 EOF
 }
 
@@ -294,7 +296,11 @@ install_binaries() {
   curl https://raw.githubusercontent.com/thisredone/rb/master/rb -o ~/.bin/rb && chmod a+x ~/.bin/rb
 
   # WeChat plugin
-  cd ~/Downloads && rm -rf WeChatPlugin-MacOS && git clone https://github.com/TKkk-iOSer/WeChatPlugin-MacOS.git --depth=1 && ./WeChatPlugin-MacOS/Other/Install.sh
+  cd ~/Downloads &&
+    rm -rf WeChatTweak-macOS &&
+    git clone https://github.com/Sunnyyoung/WeChatTweak-macOS --depth=1 &&
+    cd WeChatTweak-macOS &&
+    sudo make install
 
   # Ammonite REPL for Scala
   sh -c '(echo "#!/usr/bin/env sh" && curl -L https://github.com/lihaoyi/Ammonite/releases/download/1.2.1/2.12-1.2.1) > ~/.bin/amm && chmod a+x ~/.bin/amm'
