@@ -11,7 +11,7 @@ install_thoughtbot() {
   # Don't check if this file exists, download it each time
   curl https://raw.githubusercontent.com/thoughtbot/laptop/master/mac > mac
   . ./mac
-  
+
   # Install basic dotfiles
   if [ -d "$HOME/.dotfiles" ]; then
     cd "$HOME/.dotfiles"
@@ -180,11 +180,11 @@ install_brew_cask() {
   cask "skim"
 
   # Utils
-  cask "alfred"
   cask "amethyst"
+  cask "arduino"
   cask "charles"
   cask "dash"
-  cask "deeper"
+  # cask "deeper"
   cask "diffmerge"
   cask "dropbox"
   cask "expressions"
@@ -207,6 +207,7 @@ install_brew_cask() {
   cask "tunnelblick"
   cask "vienna"
   cask "yujitach-menumeters"
+  cask "zazu"
 
   # Music
   cask "clementine"
@@ -222,6 +223,7 @@ install_brew_cask() {
   # Communication
   cask "flume"
   cask "keybase"
+  cask "mstdn"
   cask "noti"
   cask "skype"
   cask "teamviewer"
@@ -231,6 +233,7 @@ install_brew_cask() {
   # Browsers
   cask "firefox"
   cask "google-chrome"
+  cask "firefox-developer-edition"
   cask "torbrowser"
 
   # Media
@@ -250,6 +253,7 @@ install_brew_cask() {
   # Games
   cask "0-ad"
   cask "openemu"
+  cask "openttd"
   # cask "playonmac"
 
   # Programming
