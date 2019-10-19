@@ -320,6 +320,7 @@ run_script() {
     sed -e 's/AppleLanguages -array "en" "nl"/AppleLanguages -array "en" "cn" "mr"/g' | \
     sed -e 's/AppleLocale -string "en_GB@currency=EUR"/AppleLocale -string "en_US@currency=USD"/g' | \
     sed -e 's/Europe\/Brussels/Asia\/Singapore/g' | \
+    grep -v 'com.apple.notificationcenterui.plist' | \
     grep -v 'com.apple.dock wvous' | \
     grep -v 'open "${HOME}/init/Solarized Dark.itermcolors' | \
     grep -v 'com.irradiatedsoftware.SizeUp' | \
