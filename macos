@@ -38,7 +38,7 @@ install_thoughtbot() {
 install_brew() {
   # Install Java for aircrack and other software
   # brew cask install java
-  brew cask install caskroom/versions/java8
+  brew cask install java
 
   brew bundle --file=- <<EOF
   # Shell
@@ -114,14 +114,13 @@ install_brew() {
 
   # Servers
   brew "darkhttpd"
-  brew "docker"
   brew "elasticsearch"
   brew "kubernetes-cli"
-  brew "mongodb"
+  brew "mongodb/brew/mongodb-community"
   brew "mysql"
 
   # Text editors
-  brew "emacs"
+  # brew "emacs"
   brew "neovim"
 
   # Utilities
@@ -168,7 +167,6 @@ install_brew_cask() {
 
   # Markdown_editors
   cask "macdown"
-  cask "marp"
   # cask "mou" # Not available for 10.12+
   cask "typora"
 
@@ -183,6 +181,7 @@ install_brew_cask() {
   cask "amethyst"
   cask "arduino"
   cask "charles"
+  cask "docker"
   cask "dash"
   # cask "deeper"
   cask "diffmerge"
@@ -192,12 +191,13 @@ install_brew_cask() {
   cask "iterm2"
   cask "jdiskreport"
   cask "kap"
-  cask "karabiner"
+  cask "karabiner-elements"
   cask "kdiff3"
   cask "keepingyouawake"
   cask "keka"
   cask "launchrocket"
   cask "meld"
+  cask "menumeters"
   cask "numi"
   cask "nvalt"
   cask "selfcontrol"
@@ -206,7 +206,6 @@ install_brew_cask() {
   cask "suspicious-package"
   cask "tunnelblick"
   cask "vienna"
-  cask "yujitach-menumeters"
   cask "zazu"
 
   # Music
@@ -223,7 +222,7 @@ install_brew_cask() {
   # Communication
   cask "flume"
   cask "keybase"
-  cask "mstdn"
+  # cask "mstdn"
   cask "noti"
   cask "skype"
   cask "teamviewer"
@@ -234,7 +233,8 @@ install_brew_cask() {
   cask "firefox"
   cask "google-chrome"
   cask "firefox-developer-edition"
-  cask "torbrowser"
+  cask "tor-browser"
+  cask "beaker-browser"
 
   # Media
   cask "darktable"
