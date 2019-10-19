@@ -84,6 +84,7 @@ install_brew() {
   brew "leiningen"
   brew "lua"
   brew "mit-scheme"
+  brew "python"
   brew "r"
   brew "rust"
   brew "s-lang"
@@ -232,7 +233,7 @@ install_brew_cask() {
   # Browsers
   cask "firefox"
   cask "google-chrome"
-  brew "homebrew/cask-versions/firefox-developer-edition"
+  cask "firefox-developer-edition"
   cask "tor-browser"
   cask "beaker-browser"
 
