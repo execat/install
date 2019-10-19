@@ -349,6 +349,7 @@ install_ohmyzsh() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh')"
     git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $HOME/.oh-my-zsh/custom/plugins/you-should-use
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
     echo "Now customizing zsh setup"
     # Change theme (remove '' if not on macOS)
@@ -445,11 +446,12 @@ show_final_messages() {
 END
 }
 
-install_thoughtbot
-install_brew
-install_brew_cask
-install_binaries
-run_script
+# install_thoughtbot
+# install_brew
+# install_brew_cask
+# install_binaries
+# run_script
 install_ohmyzsh
-install_spacevim
-show_final_messages
+# install_spacevim
+# install_emacs
+# show_final_messages
