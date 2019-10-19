@@ -85,7 +85,6 @@ install_brew() {
   brew "lua"
   brew "mit-scheme"
   brew "python"
-  brew "r"
   brew "rust"
   brew "s-lang"
   brew "sbt"
@@ -279,6 +278,10 @@ install_brew_cask() {
   cask "insomnia"
   cask "postman"
 
+  # Install emacs for Spacemacs
+  tap "d12frosted/emacs-plus"
+  brew "emacs-plus"
+
   tap "homebrew/cask-fonts"
 
   # Brew cask fonts
@@ -314,9 +317,9 @@ run_script() {
   # End script before killing all applications
   curl https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos | \
     sed -e 's/# Kill affected applications/exit/g' | \
-    sed -e 's/AppleLanguages -array "en" "nl"/AppleLanguages -array "en" "cn"/g' | \
+    sed -e 's/AppleLanguages -array "en" "nl"/AppleLanguages -array "en" "cn" "mr"/g' | \
     sed -e 's/AppleLocale -string "en_GB@currency=EUR"/AppleLocale -string "en_US@currency=USD"/g' | \
-    sed -e 's/Europe\/Brussels/America\/Chicago/g' | \
+    sed -e 's/Europe\/Brussels/Asia\/Singapore/g' | \
     grep -v 'com.apple.dock wvous' | \
     grep -v 'open "${HOME}/init/Solarized Dark.itermcolors' | \
     grep -v 'com.irradiatedsoftware.SizeUp' | \
@@ -378,7 +381,7 @@ install_spacevim() {
     git pull
   else
     curl -sLf https://spacevim.org/install.sh | bash -s -- --install neovim
-    pip install neovim
+    pip3 install neovim
     nvim
 
     if [ -d "$HOME/.SpaceVim.d" ]; then
@@ -389,15 +392,34 @@ install_spacevim() {
   fi
 }
 
+install_emacs() {
+  if [ -d "$HOME/.emacs.d" ]; then
+    echo "If this is from your previous emacs installation, delete this file and rerun this method"
+    cd "$HOME/.emacs.d"
+    git pull
+  else
+    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+    if [ -d "$HOME/.emacs.d" ]; then
+      echo "~/.emacs.d is created"
+    else
+      echo "~/.emacs.d folder not found"
+    fi
+  fi
+}
+
 show_final_messages() {
   cat << END
-  Go to Trackpad and uncheck and check the "Tap to click" and "Secondary click" option.
+  Go to Trackpad and set these options:
+    * Look up & data detectors -> tap with 3 fingers
+    * Secondary click -> Click or tap with 2 fingers
+    * Tap to click -> Tap with one finger
   Also move click to "light" and turn on silent clicking.
 
   Also do these things manually:
-  1. Activate unlimited scrollback for iTerm, set to 'reuse previous dir', change font to Inconsolata-dz Pt 14
+  1. Activate unlimited scrollback for iTerm, set to 'reuse previous dir', change font to Inconsolata-dz Pt 14, in Profile -> Terminal -> Silence bell
   2. Go to Finder -> Cmd + up arrow 2 times -> Drag your home folder to left sidebar
-  3. Click on battery on top right and click on "Show Percentage"
+  3. Click on battery on top right and click on "Show Percentage", click on input method -> open keyboard preferences -> set caps lock to change input method
   4. Login to your Firefox account and start bookmark/addon sync
   5. Login to your accounts in Netease Music Player/Xiami
   6. Put Flux on autostart
