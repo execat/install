@@ -6,11 +6,12 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 install_thoughtbot() {
-  mkdir -p "$HOME/installer/logs" && cd "$HOME/installer"
+  log_folder="$HOME/installer/logs"
+  mkdir -p $log_folder && cd "$HOME/installer"
 
   # Don't check if this file exists, download it each time
   curl https://raw.githubusercontent.com/thoughtbot/laptop/master/mac > mac
-  . ./mac
+  sh mac 2>&1 | tee $log_folder/thoughtbot.log
 
   # Install basic dotfiles
   if [ -d "$HOME/.dotfiles" ]; then
@@ -224,6 +225,7 @@ install_brew_cask() {
   cask "keybase"
   # cask "mstdn"
   cask "noti"
+  cask "nordvpn"
   cask "skype"
   cask "teamviewer"
   cask "telegram"
@@ -321,6 +323,7 @@ run_script() {
     sed -e 's/AppleLocale -string "en_GB@currency=EUR"/AppleLocale -string "en_US@currency=USD"/g' | \
     sed -e 's/Europe\/Brussels/Asia\/Singapore/g' | \
     grep -v 'com.apple.notificationcenterui.plist' | \
+    grep -v 'Solarized Dark xterm-256color' | \
     grep -v 'com.apple.dock wvous' | \
     grep -v 'open "${HOME}/init/Solarized Dark.itermcolors' | \
     grep -v 'com.irradiatedsoftware.SizeUp' | \
@@ -435,6 +438,10 @@ show_final_messages() {
   13. Start jdiskreport and run mlocate
   14. Set up keyboards for your preferred languages and layouts
   15. Put sensible defaults for Menumeters
+      * Display CPU Menu Meter -> Percentage, Display percentage as: User and System
+      * Disk -> No
+      * Memory -> Used/Free Totals
+      * Network -> Arrows and Throughput
   16. Install Xcode from App Store and execute these two commands:
       * sudo xcode-select -s /Applications/Xcode.app
       * sudo xcodebuild -license
