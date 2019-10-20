@@ -447,12 +447,12 @@ show_final_messages() {
 END
 }
 
-# install_thoughtbot
-# install_brew
-# install_brew_cask
-# install_binaries
-# run_script
+install_thoughtbot
+install_brew
+install_brew_cask
+install_binaries
+run_script
 install_ohmyzsh
-# install_spacevim
-# install_emacs
-# show_final_messages
+install_spacevim
+install_emacs
+show_final_messages
