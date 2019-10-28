@@ -228,6 +228,7 @@ install_brew_cask() {
   cask "nordvpn"
   cask "skype"
   cask "teamviewer"
+  cask "thunderbird"
   cask "telegram"
   cask "wechat"
 
