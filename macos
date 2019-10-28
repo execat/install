@@ -110,6 +110,14 @@ install_brew() {
   # brew "emacs"
   brew "neovim"
 
+  # Rust utilities # https://www.wezm.net/technical/2019/10/useful-command-line-tools/
+  brew "bat"
+  brew "dust"
+  brew "exa"
+  brew "hexyl"
+  brew "mdcat"
+  brew "tig"
+
   # Utilities
   brew "buku"
   brew "cloc"
@@ -180,6 +188,7 @@ install_brew_cask() {
   cask "skim"
 
   # Utils
+  cask "alacritty"
   cask "amethyst"
   cask "arduino"
   cask "charles"
