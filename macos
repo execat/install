@@ -216,7 +216,7 @@ install_brew_cask() {
   cask "suspicious-package"
   cask "tunnelblick"
   cask "vienna"
-  cask "zazu"
+  # cask "zazu" # Alfred ;-(
 
   # Music
   cask "clementine"
