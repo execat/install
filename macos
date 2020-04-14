@@ -84,6 +84,7 @@ install_brew() {
   brew "guile"
   brew "leiningen"
   brew "lua"
+  brew "nvm"
   brew "mit-scheme"
   brew "python"
   brew "rust"
@@ -271,7 +272,8 @@ install_brew_cask() {
   # Programming
   # cask "affinic-debugger"
   cask "kitematic"
-  # cask "virtualbox"
+  cask "virtualbox"
+  cask "virtualbox-extension-pack"
 
   # Languages
   cask "racket"
