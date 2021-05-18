@@ -207,6 +207,7 @@ install_brew_cask() {
   cask "keepingyouawake"
   cask "keka"
   cask "launchrocket"
+  cask "meetingbar"
   cask "meld"
   cask "menumeters"
   cask "numi"
