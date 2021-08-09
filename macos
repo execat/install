@@ -464,6 +464,7 @@ show_final_messages() {
   18. Execute 'defaults write com.apple.dock persistent-apps -array' to remove all the dock items (if installing for the first time)
   19. Disable notifications on Firefox: about:config > dom.webnotifications.enabled > set to false
   20. sudo spctl --master-disable to allow all installations from packages, install wireless: https://community.tp-link.com/en/home/stories/detail/1642
+  21. Iterm preferences -> Keys -> Keybindings -> Change Ctrl + Tab and Ctrl + Shift + Tab to "Next tab" and "Previous tab"
 
   Finally, close this tab and all the previously opened terminal tabs and continue working in a new tab.
 END
